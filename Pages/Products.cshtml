@@ -1,0 +1,39 @@
+﻿@page
+@model GuardianCyberStore.Pages.ProductsModel
+@{
+}
+
+<div class="row">
+    @foreach (var product in Model.ProductList)
+    {
+        <div class="card col-md-4">
+            <div class="card-img" style="background-image: url('@product.ProductImage');"></div>
+            <div class="card-body product-name">
+                <h5 class="card-title">@product.Name</h5>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title product-description">@product.Description</h5>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <div>
+                    <h5 class="card-title">£@product.Price</h5>
+                    <form method="post" asp-page-handler="AddToCart">
+                        <input type="hidden" name="id" value="@product.Id" />
+                        <button type="submit" class="btn btn-success btn-sm action-btn">Add to Cart</button>
+                    </form>
+                </div>
+                <div>
+                    <form method="post" asp-page-handler="Delete">
+                        <input type="hidden" name="id" value="@product.Id" />
+                        <button type="submit" class="btn btn-danger btn-sm action-btn">Delete</button>
+                    </form>
+                    <form method="post" asp-page-handler="Update">
+                        <input type="hidden" name="id" value="@product.Id" />
+                        <button type="submit" class="btn btn-info btn-sm action-btn">Update</button>
+                    </form>
+                </div>
+               
+            </div>
+        </div>
+    }
+</div>

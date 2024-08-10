@@ -1,0 +1,73 @@
+﻿@page
+@model GuardianCyberStore.Pages.AddProductModel
+@{
+    ViewData["Title"] = "Product";
+}
+
+<div class="container py-3">
+    <h2>@ViewData["Title"]</h2>
+
+    <form class="" method="post" class="my-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="@Model.product.Id" />
+        <div class="form-group">
+            <label for="pname" asp-for="@Model.product.Name" class="control-label"><strong>Product Name</strong></label>
+            <input type="text" asp-for="@Model.product.Name" class="form-control id="pname" />
+        </div>
+        <div class="form-group">
+            <label for="pdescription" asp-for="@Model.product.Description" class="control-label"><strong>Description</strong></label>
+            <input type="text" asp-for="@Model.product.Description" class="form-control id="pdescription" />
+        </div>
+        <div class="form-group">
+            <label for="price" asp-for="@Model.product.Price" class="control-label"><strong>Price</strong></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">£</span>
+                </div>
+                <input type="text" asp-for="@Model.product.Price" class="form-control" id="price" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="quantity" asp-for="@Model.product.Quantity" class="control-label"><strong>Quantity</strong></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button type="button" class="btn btn-outline-secondary" onclick="decrement()">-</button>
+                </div>
+                <input type="text" asp-for="@Model.product.Quantity" class="form-control" id="quantity" />
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-outline-secondary" onclick="increment()">+</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function increment() {
+                var value = parseInt(document.getElementById('quantity').value, 10);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('quantity').value = value;
+            }
+
+            function decrement() {
+                var value = parseInt(document.getElementById('quantity').value, 10);
+                value = isNaN(value) ? 0 : value;
+                value < 1 ? value = 1 : '';
+                value--;
+                document.getElementById('quantity').value = value;
+            }
+        </script>
+        
+        <div class="form-group">
+            <label for="pimage" asp-for="@Model.product.ProductImage" class="control-label"><strong>Image Name</strong>:</label>
+            <input type="text" asp-for="@Model.product.ProductImage" class="form-control id="pimage" />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.product.CategoryId" class="control-label"><strong>Category</strong></label>
+            <select asp-for="@Model.product.CategoryId" asp-items="@Model.Categories" class="form-control"></select>
+        </div>
+        
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

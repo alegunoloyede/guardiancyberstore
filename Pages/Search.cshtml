@@ -1,0 +1,37 @@
+﻿@page
+@model GuardianCyberStore.Pages.SearchModel
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="text-center mb-3">Products</h2>
+            <div class="list-group">
+                @foreach (var product in Model.ProductResults)
+                {
+                    <a href="/Products?id=@product.Id" class="list-group-item list-group-item-action">
+                        @product.Name
+                    </a>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <h2 class="text-center mb-3">Categories</h2>
+            <div class="list-group">
+                @foreach (var category in Model.CategoryResults)
+                {
+                    <a href="/Category?id=@category.Id" class="list-group-item list-group-item-action">
+                        @category.Name
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
